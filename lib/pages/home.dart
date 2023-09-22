@@ -28,49 +28,41 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    tabController = TabController(length: 2, vsync: this);
-  }
-
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: mobileBackgroundColor,
         key: _scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: mobileBackgroundColor,
-          title: TextFormField(
-            decoration: const InputDecoration(
-                prefixIconColor: Colors.white,
-                filled: true,
-                fillColor: mobileSearchColor,
-                border: UnderlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.all(Radius.circular(25))),
-                prefixIcon: Icon(Icons.search),
-                suffixIcon: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    RotatedBox(
-                        quarterTurns: 1, child: Icon(Icons.horizontal_rule)),
-                    Padding(
-                      padding: EdgeInsets.only(right: 8.0),
-                      child: Icon(Icons.mic_none),
-                    ),
-                  ],
-                ),
-                suffixIconColor: Colors.white,
-                hintStyle: TextStyle(color: Colors.white),
-                hintText: 'Search songs , playlist and artists'),
-            cursorRadius: const Radius.circular(50),
-          ),
-          leading: IconButton(
-            icon: const Icon(Icons.settings_brightness_sharp),
-            onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-          ),
+          appBar: AppBar(
+            backgroundColor: mobileBackgroundColor,
+            title: TextFormField(
+              decoration: const InputDecoration(
+                  prefixIconColor: Colors.white,
+                  filled: true,
+                  fillColor: mobileSearchColor,
+                  border: UnderlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(Radius.circular(25))),
+                  prefixIcon: Icon(Icons.search),
+                  suffixIcon: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      RotatedBox(
+                          quarterTurns: 1, child: Icon(Icons.horizontal_rule)),
+                      Padding(
+                        padding: EdgeInsets.only(right: 8.0),
+                        child: Icon(Icons.mic_none),
+                      ),
+                    ],
+                  ),
+                  suffixIconColor: Colors.white,
+                  hintStyle: TextStyle(color: Colors.white),
+                  hintText: 'Search songs , playlist and artists'),
+              cursorRadius: const Radius.circular(50),
+            ),
+            leading: IconButton(
+              icon: const Icon(Icons.settings_brightness_sharp),
+              onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+            ),
         ),
         drawer: const Drawer(
           child: Text(''),
