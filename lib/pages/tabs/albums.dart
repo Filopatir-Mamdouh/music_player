@@ -15,7 +15,7 @@ class Albums extends StatelessWidget {
                   IconButton(onPressed: () {}, icon: const Icon(Icons.sort))),
           for (int i = 0; i < 10; i++)
             ListTile(
-              leading: Image.asset("", width: 200),
+              leading: Image.asset("assets/song.jpeg", width: 200),
               title: const Text("Name"),
               subtitle: const Text("Artist"),
               trailing: IconButton(
