@@ -20,7 +20,6 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-          backgroundColor: mobileBackgroundColor,
           appBar: AppBar(
             backgroundColor: mobileBackgroundColor,
             title: TextFormField(
@@ -62,9 +61,6 @@ class _HomePageState extends State<HomePage> {
               ),
               Tab(child: Text("Folders"))
             ]),
-          ),
-          drawer: const Drawer(
-            child: Text(''),
           ),
           body: const TabBarView(
               children: [Songs(), Artists(), Albums(), Folders()])),
