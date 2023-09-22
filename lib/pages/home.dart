@@ -6,32 +6,21 @@ import 'package:music_player/pages/tabs/songs.dart';
 import 'package:music_player/utils/colors.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  final emailController = TextEditingController();
-  final phoneController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  bool isLoading = true;
-  late TabController tabController;
-  TabController? _tabController;
-  @override
-  void dispose() {
-    emailController.dispose();
-    phoneController.dispose();
-    super.dispose();
-  }
+class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: mobileBackgroundColor,
-        key: _scaffoldKey,
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+          backgroundColor: mobileBackgroundColor,
           appBar: AppBar(
             backgroundColor: mobileBackgroundColor,
             title: TextFormField(
@@ -63,107 +52,96 @@ class _HomePageState extends State<HomePage>
               icon: const Icon(Icons.settings_brightness_sharp),
               onPressed: () => _scaffoldKey.currentState?.openDrawer(),
             ),
-        ),
-        drawer: const Drawer(
-          child: Text(''),
-        ),
-        body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(children: [
-              Expanded(
-                  flex: 1,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 2.5, left: 2.5),
-                          child: MaterialButton(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            onPressed: () {},
-                            color: const Color.fromARGB(255, 77, 18, 87),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(Icons.favorite),
-                                Text("Favourites")
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 2.5, left: 2.5),
-                          child: MaterialButton(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            onPressed: () {},
-                            color: const Color.fromARGB(255, 3, 53, 5),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(Icons.playlist_play),
-                                Text("Playlists")
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 2.5, left: 2.5),
-                          child: MaterialButton(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            onPressed: () {},
-                            color: const Color.fromARGB(255, 120, 83, 8),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(Icons.recent_actors),
-                                Text("Recent")
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  )),
-              Form(
-                key: _formKey,
-                child: Expanded(
-                  flex: 5,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        TabBar(
-                            controller: tabController,
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            tabs: [
-                              Tab(
-                                child: Text("Songs"),
-                              ),
-                              Tab(child: Text("Artists")),
-                              Tab(
-                                child: Text("Albums"),
-                              ),
-                              Tab(child: Text("Folders"))
-                            ]),
-                        TabBarView(
-                            controller: tabController,
-                            children: [Songs(), Artists(), Albums(), Folders()])
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ])));
+            bottom: const TabBar(tabs: [
+              Tab(
+                child: Text("Songs"),
+              ),
+              Tab(child: Text("Artists")),
+              Tab(
+                child: Text("Albums"),
+              ),
+              Tab(child: Text("Folders"))
+            ]),
+          ),
+          drawer: const Drawer(
+            child: Text(''),
+          ),
+          body: const TabBarView(
+              children: [Songs(), Artists(), Albums(), Folders()])),
+    );
   }
 }
+
+/*Row(
+                children: [
+                  Expanded(
+                      flex: 1,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 2.5, left: 2.5),
+                              child: MaterialButton(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                onPressed: () {},
+                                color: const Color.fromARGB(255, 77, 18, 87),
+                                child: const Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.favorite),
+                                    Text("Favourites")
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 2.5, left: 2.5),
+                              child: MaterialButton(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                onPressed: () {},
+                                color: const Color.fromARGB(255, 3, 53, 5),
+                                child: const Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.playlist_play),
+                                    Text("Playlists")
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 2.5, left: 2.5),
+                              child: MaterialButton(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                onPressed: () {},
+                                color: const Color.fromARGB(255, 120, 83, 8),
+                                child: const Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.recent_actors),
+                                    Text("Recent")
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                ],
+              ),*/ 
