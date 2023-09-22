@@ -51,16 +51,113 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.settings_brightness_sharp),
               onPressed: () => _scaffoldKey.currentState?.openDrawer(),
             ),
-            bottom: const TabBar(tabs: [
-              Tab(
-                child: Text("Songs"),
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(150),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                            flex: 1,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 2.5, left: 2.5),
+                                    child: MaterialButton(
+                                      height: 85,
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10))),
+                                      onPressed: () {},
+                                      color:
+                                          const Color.fromARGB(255, 77, 18, 87),
+                                      child: const Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.favorite),
+                                          Text("Favourites")
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 2.5, left: 2.5),
+                                    child: MaterialButton(
+                                      height: 85,
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10))),
+                                      onPressed: () {},
+                                      color:
+                                          const Color.fromARGB(255, 3, 53, 5),
+                                      child: const Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.playlist_play),
+                                          Text("Playlists")
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 2.5, left: 2.5),
+                                    child: MaterialButton(
+                                      height: 85,
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10))),
+                                      onPressed: () {},
+                                      color:
+                                          const Color.fromARGB(255, 120, 83, 8),
+                                      child: const Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.recent_actors),
+                                          Text("Recent")
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
+                    const TabBar(tabs: [
+                      Tab(
+                        child: Text("Songs"),
+                      ),
+                      Tab(child: Text("Artists")),
+                      Tab(
+                        child: Text("Albums"),
+                      ),
+                      Tab(child: Text("Folders"))
+                    ]),
+                  ],
+                ),
               ),
-              Tab(child: Text("Artists")),
-              Tab(
-                child: Text("Albums"),
-              ),
-              Tab(child: Text("Folders"))
-            ]),
+            ),
           ),
           body: const TabBarView(
               children: [Songs(), Artists(), Albums(), Folders()])),
