@@ -24,7 +24,7 @@ class Songs extends StatelessWidget {
           ),
           for (int i = 0; i < 10; i++)
             ListTile(
-              leading: Image.asset(""),
+              leading: Image.asset('assets/song.jpeg'),
               title: const Text("Name"),
               subtitle: const Text("Artist"),
               trailing: SizedBox(
