@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:music_player/utils/colors.dart';
 import 'package:music_player/widgets/appbar.dart';
 
-class Playlists extends StatelessWidget {
-  const Playlists({super.key});
+class PlaylistsPage extends StatelessWidget {
+  const PlaylistsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
