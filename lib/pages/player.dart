@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music_player/provider/musicprovider.dart';
-import 'package:music_player/utils/musicplayer.dart';
 
 class MusicPlayerPage extends ConsumerWidget {
   const MusicPlayerPage({super.key});
