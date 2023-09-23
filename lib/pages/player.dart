@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:audioplayers/audioplayers.dart';
-
-
+import 'package:permission_handler/permission_handler.dart';
 
 class MusicPlayer extends StatefulWidget {
+  const MusicPlayer({super.key});
+
   @override
   _MusicPlayerState createState() => _MusicPlayerState();
 }
@@ -14,14 +15,18 @@ class _MusicPlayerState extends State<MusicPlayer> {
   bool isPlaying = false;
   String currentSong = "Song Name";
   double songProgress = 0.0;
-  Duration songDuration = Duration(seconds: 0);
-
+  Duration songDuration = const Duration(seconds: 0);
 
   Future<void> playLocalSong() async {
+    var status = await Permission.storage.request();
+    if (status.isDenied) {
+      // We didn't ask for permission yet or the permission has been denied before, but not permanently.
+    }
     final dir = await getApplicationDocumentsDirectory();
-    final localFile = '${dir.path}';
+    DeviceFileSource localFile =
+        DeviceFileSource('/sdcard/Download/marwanmoussa.mp3');
 
-    await audioPlayer.play(localFile, isLocal: true);
+    await audioPlayer.play(localFile);
     setState(() {
       isPlaying = true;
     });
@@ -32,9 +37,10 @@ class _MusicPlayerState extends State<MusicPlayer> {
       });
     }); 
 
-    audioPlayer.onAudioPositionChanged.listen((Duration position) {
+    audioPlayer.onPositionChanged.listen((Duration position) {
       setState(() {
-        songProgress = position.inSeconds.toDouble() / songDuration.inSeconds.toDouble();
+        songProgress =
+            position.inSeconds.toDouble() / songDuration.inSeconds.toDouble();
       });
     });
   }
@@ -61,7 +67,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Music Player"),
+        title: const Text("Music Player"),
       ),
       body: Center(
         child: Card(
@@ -81,34 +87,26 @@ class _MusicPlayerState extends State<MusicPlayer> {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   currentSong,
-                  style: TextStyle(fontSize: 24),
+                  style: const TextStyle(fontSize: 24),
                 ),
               ),
               // Song Progress Slider
-              Slider(
-                value: songProgress,
-                onChanged: (value) {
-                  final newPosition = Duration(seconds: (value * songDuration.inSeconds.toDouble()).round());
-                  audioPlayer.seek(newPosition);
-                  setState(() {
-                    songProgress = value;
-                  });
-                },
-              ),
               // Play, Pause, Next, and Previous Buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.skip_previous),
+                    icon: const Icon(Icons.skip_previous),
                     onPressed: playPreviousSong,
                   ),
                   IconButton(
-                    icon: isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
-                    onPressed: isPlaying ? stopSong : () => playLocalSong(),
+                    icon: isPlaying
+                        ? const Icon(Icons.pause)
+                        : const Icon(Icons.play_arrow),
+                    onPressed: () => isPlaying ? stopSong() : playLocalSong(),
                   ),
                   IconButton(
-                    icon: Icon(Icons.skip_next),
+                    icon: const Icon(Icons.skip_next),
                     onPressed: playNextSong,
                   ),
                 ],

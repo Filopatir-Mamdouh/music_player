@@ -9,14 +9,9 @@ import 'package:music_player/pages/tabs/folders.dart';
 import 'package:music_player/pages/tabs/songs.dart';
 import 'package:music_player/utils/colors.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -57,7 +52,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => _scaffoldKey.currentState?.openDrawer(),
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(150),
+            preferredSize: const Size.fromHeight(150),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -179,16 +174,16 @@ class _HomePageState extends State<HomePage> {
             decoration: BoxDecoration(
                 color: Color.fromARGB(255, 64, 66, 82),
                 borderRadius: BorderRadius.all(Radius.circular(45))),
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             height: 60,
             margin: const EdgeInsets.all(10),
             child: Row(children: [
-              CircleAvatar(
+              const CircleAvatar(
                 backgroundImage: AssetImage(
                   "assets/song.jpeg",
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
