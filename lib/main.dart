@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:music_player/pages/home.dart';
-import 'package:music_player/pages/player.dart';
-
 import 'package:music_player/utils/filemanager.dart';
 
 void main() async {

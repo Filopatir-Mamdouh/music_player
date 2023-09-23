@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:music_player/provider/musicprovider.dart';
 import 'package:music_player/utils/musicplayer.dart';
 
 class MusicPlayerPage extends ConsumerWidget {
-  MusicPlayerPage({super.key});
-
-  AudioPlayer audioPlayer = AudioPlayer();
-
-  String currentSong = "Song Name";
-
-  double songProgress = 0.0;
-
-  Duration songDuration = const Duration(seconds: 0);
+  const MusicPlayerPage({super.key});
   @override
   Widget build(BuildContext context, ref) {
     bool isPlaying = ref.watch(musicplayerProvider).isplaying;
@@ -38,7 +29,7 @@ class MusicPlayerPage extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  currentSong,
+                  ref.watch(musicplayerProvider).currentplaying.songName,
                   style: const TextStyle(fontSize: 24),
                 ),
               ),

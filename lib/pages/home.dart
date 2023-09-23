@@ -10,8 +10,6 @@ import 'package:music_player/pages/tabs/songs.dart';
 import 'package:music_player/provider/musicprovider.dart';
 import 'package:music_player/utils/colors.dart';
 
-import '../utils/musicplayer.dart';
-
 class HomePage extends ConsumerWidget {
   HomePage({super.key});
 
