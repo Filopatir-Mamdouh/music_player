@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:music_player/models/recent.dart';
+import 'package:music_player/pages/favorites.dart';
+import 'package:music_player/pages/playlists.dart';
+import 'package:music_player/pages/recent.dart';
 import 'package:music_player/pages/tabs/albums.dart';
 import 'package:music_player/pages/tabs/artests.dart';
 import 'package:music_player/pages/tabs/folders.dart';
@@ -20,6 +24,7 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        backgroundColor:mobileBackgroundColor ,
         appBar: AppBar(
           backgroundColor: mobileBackgroundColor,
           title: TextFormField(
@@ -74,7 +79,9 @@ class _HomePageState extends State<HomePage> {
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
-                                    onPressed: () {},
+                                    onPressed: () {Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (context) => FavoritesPage()));
+                                                                 },
                                     color:
                                         const Color.fromARGB(255, 77, 18, 87),
                                     child: const Column(
@@ -99,7 +106,9 @@ class _HomePageState extends State<HomePage> {
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
-                                    onPressed: () {},
+                                    onPressed: () {Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (context) => PlaylistsPage()));
+                                                                 },
                                     color: const Color.fromARGB(255, 3, 53, 5),
                                     child: const Column(
                                       mainAxisAlignment:
@@ -123,7 +132,9 @@ class _HomePageState extends State<HomePage> {
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
-                                    onPressed: () {},
+                                    onPressed: () {Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (context) => RecentPage()));
+                                                                 },
                                     color:
                                         const Color.fromARGB(255, 120, 83, 8),
                                     child: const Column(
@@ -166,7 +177,7 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: Stack(fit: StackFit.passthrough, children: [
           Container(
             decoration: BoxDecoration(
-                color: Colors.black,
+                color: Color.fromARGB(255, 64, 66, 82),
                 borderRadius: BorderRadius.all(Radius.circular(45))),
             padding: EdgeInsets.all(10),
             height: 60,
@@ -186,10 +197,10 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                   child: IconButton(
-                      onPressed: () {}, icon: Icon(Icons.play_arrow_rounded))),
+                      onPressed: () {}, icon: Icon(Icons.play_arrow_rounded,color: Colors.white,))),
               Expanded(
                 child: IconButton(
-                    onPressed: () {}, icon: Icon(Icons.arrow_forward_outlined)),
+                    onPressed: () {},  icon: Icon( Icons.arrow_forward_outlined,color: Colors.white,),),
               )
             ]),
           ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music_player/widgets/appbar.dart';
 
-class Recent extends StatelessWidget {
-  const Recent({super.key});
+class RecentPage extends StatelessWidget {
+  const RecentPage({super.key});
 
   @override
   Widget build(BuildContext context) {
