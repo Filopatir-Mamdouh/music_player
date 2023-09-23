@@ -30,7 +30,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
       setState(() {
         songDuration = duration;
       });
-    });
+    }); 
 
     audioPlayer.onAudioPositionChanged.listen((Duration position) {
       setState(() {
