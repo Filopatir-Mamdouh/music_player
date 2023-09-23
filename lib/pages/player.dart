@@ -1,70 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:music_player/provider/musicprovider.dart';
+import 'package:music_player/utils/musicplayer.dart';
 
-class MusicPlayer extends StatefulWidget {
-  const MusicPlayer({super.key});
+class MusicPlayerPage extends ConsumerWidget {
+  MusicPlayerPage({super.key});
 
-  @override
-  _MusicPlayerState createState() => _MusicPlayerState();
-}
-
-class _MusicPlayerState extends State<MusicPlayer> {
   AudioPlayer audioPlayer = AudioPlayer();
-  bool isPlaying = false;
+
   String currentSong = "Song Name";
+
   double songProgress = 0.0;
+
   Duration songDuration = const Duration(seconds: 0);
-
-  Future<void> playLocalSong() async {
-    var status = await Permission.storage.request();
-    if (status.isDenied) {
-      // We didn't ask for permission yet or the permission has been denied before, but not permanently.
-    }
-    final dir = await getApplicationDocumentsDirectory();
-    DeviceFileSource localFile =
-        DeviceFileSource('/sdcard/Download/marwanmoussa.mp3');
-
-    await audioPlayer.play(localFile);
-    setState(() {
-      isPlaying = true;
-    });
-
-    audioPlayer.onDurationChanged.listen((Duration duration) {
-      setState(() {
-        songDuration = duration;
-      });
-    }); 
-
-    audioPlayer.onPositionChanged.listen((Duration position) {
-      setState(() {
-        songProgress =
-            position.inSeconds.toDouble() / songDuration.inSeconds.toDouble();
-      });
-    });
-  }
-
-  // Function to stop the song
-  void stopSong() async {
-    await audioPlayer.stop();
-    setState(() {
-      isPlaying = false;
-    });
-  }
-
-  // Function for the next song
-  void playNextSong() {
-    // Update the current song and play the next song here
-  }
-
-  // Function for the previous song
-  void playPreviousSong() {
-    // Update the current song and play the previous song here
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    bool isPlaying = ref.watch(musicplayerProvider).isplaying;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Music Player"),
@@ -97,17 +49,22 @@ class _MusicPlayerState extends State<MusicPlayer> {
                 children: <Widget>[
                   IconButton(
                     icon: const Icon(Icons.skip_previous),
-                    onPressed: playPreviousSong,
+                    onPressed: () {},
                   ),
                   IconButton(
                     icon: isPlaying
                         ? const Icon(Icons.pause)
                         : const Icon(Icons.play_arrow),
-                    onPressed: () => isPlaying ? stopSong() : playLocalSong(),
+                    onPressed: () => isPlaying
+                        ? MusicPlayer.stopSong()
+                        : MusicPlayer.playsong(
+                            ref.watch(musicplayerProvider).currentplaying),
                   ),
                   IconButton(
                     icon: const Icon(Icons.skip_next),
-                    onPressed: playNextSong,
+                    onPressed: () {
+                      ref.read(musicplayerProvider).playnext();
+                    },
                   ),
                 ],
               ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/models/recent.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music_player/pages/favorites.dart';
 import 'package:music_player/pages/playlists.dart';
 import 'package:music_player/pages/recent.dart';
@@ -7,19 +7,24 @@ import 'package:music_player/pages/tabs/albums.dart';
 import 'package:music_player/pages/tabs/artests.dart';
 import 'package:music_player/pages/tabs/folders.dart';
 import 'package:music_player/pages/tabs/songs.dart';
+import 'package:music_player/provider/musicprovider.dart';
 import 'package:music_player/utils/colors.dart';
 
-class HomePage extends StatelessWidget {
+import '../utils/musicplayer.dart';
+
+class HomePage extends ConsumerWidget {
   HomePage({super.key});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    bool isPlaying = ref.watch(musicplayerProvider).isplaying;
+    var currentPLaying = ref.watch(musicplayerProvider).currentplaying;
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        backgroundColor:mobileBackgroundColor ,
+        backgroundColor: mobileBackgroundColor,
         appBar: AppBar(
           backgroundColor: mobileBackgroundColor,
           title: TextFormField(
@@ -74,9 +79,12 @@ class HomePage extends StatelessWidget {
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
-                                    onPressed: () {Navigator.of(context).push(MaterialPageRoute(
-                                                    builder: (context) => FavoritesPage()));
-                                                                 },
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  FavoritesPage()));
+                                    },
                                     color:
                                         const Color.fromARGB(255, 77, 18, 87),
                                     child: const Column(
@@ -101,9 +109,12 @@ class HomePage extends StatelessWidget {
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
-                                    onPressed: () {Navigator.of(context).push(MaterialPageRoute(
-                                                    builder: (context) => PlaylistsPage()));
-                                                                 },
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const PlaylistsPage()));
+                                    },
                                     color: const Color.fromARGB(255, 3, 53, 5),
                                     child: const Column(
                                       mainAxisAlignment:
@@ -127,9 +138,12 @@ class HomePage extends StatelessWidget {
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
-                                    onPressed: () {Navigator.of(context).push(MaterialPageRoute(
-                                                    builder: (context) => RecentPage()));
-                                                                 },
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const RecentPage()));
+                                    },
                                     color:
                                         const Color.fromARGB(255, 120, 83, 8),
                                     child: const Column(
@@ -171,7 +185,7 @@ class HomePage extends StatelessWidget {
             children: [Songs(), Artists(), Albums(), Folders()]),
         bottomNavigationBar: Stack(fit: StackFit.passthrough, children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 64, 66, 82),
                 borderRadius: BorderRadius.all(Radius.circular(45))),
             padding: const EdgeInsets.all(10),
@@ -183,19 +197,37 @@ class HomePage extends StatelessWidget {
                   "assets/song.jpeg",
                 ),
               ),
-              const Expanded(
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [Text("name"), Text("artist")],
+                  children: [
+                    Text(currentPLaying.songName),
+                    Text(currentPLaying.artist)
+                  ],
                 ),
               ),
               Expanded(
                   child: IconButton(
-                      onPressed: () {}, icon: Icon(Icons.play_arrow_rounded,color: Colors.white,))),
+                      onPressed: () =>
+                          ref.read(musicplayerProvider).playmusic(),
+                      icon: isPlaying
+                          ? const Icon(
+                              Icons.pause_circle,
+                              color: Colors.white,
+                            )
+                          : const Icon(
+                              Icons.play_arrow_rounded,
+                              color: Colors.white,
+                            ))),
               Expanded(
                 child: IconButton(
-                    onPressed: () {},  icon: Icon( Icons.arrow_forward_outlined,color: Colors.white,),),
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.arrow_forward_outlined,
+                    color: Colors.white,
+                  ),
+                ),
               )
             ]),
           ),

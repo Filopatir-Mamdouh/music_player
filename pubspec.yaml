@@ -39,6 +39,8 @@ dependencies:
   flutter_riverpod: ^2.4.0
   audioplayers: ^5.1.0
   permission_handler: ^11.0.0
+  external_path: ^1.0.3
+  flutter_media_metadata: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:
