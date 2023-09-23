@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music_player/pages/favorites.dart';
+import 'package:music_player/pages/player.dart';
 import 'package:music_player/pages/playlists.dart';
 import 'package:music_player/pages/recent.dart';
 import 'package:music_player/pages/tabs/albums.dart';
@@ -182,52 +183,60 @@ class HomePage extends ConsumerWidget {
         body: const TabBarView(
             children: [Songs(), Artists(), Albums(), Folders()]),
         bottomNavigationBar: Stack(fit: StackFit.passthrough, children: [
-          Container(
-            decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 64, 66, 82),
-                borderRadius: BorderRadius.all(Radius.circular(45))),
-            padding: const EdgeInsets.all(10),
-            height: 60,
-            margin: const EdgeInsets.all(10),
-            child: Row(children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage(
-                  "assets/song.jpeg",
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(currentPLaying.songName),
-                    Text(currentPLaying.artist)
-                  ],
-                ),
-              ),
-              Expanded(
-                  child: IconButton(
-                      onPressed: () =>
-                          ref.read(musicplayerProvider).playmusic(),
-                      icon: isPlaying
-                          ? const Icon(
-                              Icons.pause_circle,
-                              color: Colors.white,
-                            )
-                          : const Icon(
-                              Icons.play_arrow_rounded,
-                              color: Colors.white,
-                            ))),
-              Expanded(
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.arrow_forward_outlined,
-                    color: Colors.white,
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (builder) => const MusicPlayerPage()));
+            },
+            child: Container(
+              decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 64, 66, 82),
+                  borderRadius: BorderRadius.all(Radius.circular(45))),
+              padding: const EdgeInsets.all(10),
+              height: 60,
+              margin: const EdgeInsets.all(10),
+              child: Row(children: [
+                const CircleAvatar(
+                  backgroundImage: AssetImage(
+                    "assets/song.jpeg",
                   ),
                 ),
-              )
-            ]),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(currentPLaying.songName),
+                      Text(currentPLaying.artist)
+                    ],
+                  ),
+                ),
+                Expanded(
+                    child: IconButton(
+                        onPressed: () =>
+                            ref.read(musicplayerProvider).playmusic(),
+                        icon: isPlaying
+                            ? const Icon(
+                                Icons.pause_circle,
+                                color: Colors.white,
+                              )
+                            : const Icon(
+                                Icons.play_arrow_rounded,
+                                color: Colors.white,
+                              ))),
+                Expanded(
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.arrow_forward_outlined,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              ]),
+            ),
           ),
         ]),
       ),

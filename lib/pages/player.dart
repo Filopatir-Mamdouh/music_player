@@ -43,14 +43,12 @@ class MusicPlayerPage extends ConsumerWidget {
                     onPressed: () {},
                   ),
                   IconButton(
-                    icon: isPlaying
-                        ? const Icon(Icons.pause)
-                        : const Icon(Icons.play_arrow),
-                    onPressed: () => isPlaying
-                        ? MusicPlayer.stopSong()
-                        : MusicPlayer.playsong(
-                            ref.watch(musicplayerProvider).currentplaying),
-                  ),
+                      icon: isPlaying
+                          ? const Icon(Icons.pause)
+                          : const Icon(Icons.play_arrow),
+                      onPressed: () {
+                        ref.read(musicplayerProvider).playmusic();
+                      }),
                   IconButton(
                     icon: const Icon(Icons.skip_next),
                     onPressed: () {

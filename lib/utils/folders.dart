@@ -12,6 +12,7 @@ void importFolders() async {
     if (entity is File &&
         entity.path.endsWith('.mp3') &&
         !entity.path.contains('/Android/')) {
+      print(entity.path);
       Data.songs.add(Song(
           path: entity.path,
           songName: entity.path.split('/').last,
