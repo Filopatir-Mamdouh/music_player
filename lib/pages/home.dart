@@ -208,7 +208,8 @@ class HomePage extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(currentPLaying.songName),
+                      Text(currentPLaying.songName,
+                          overflow: TextOverflow.ellipsis),
                       Text(currentPLaying.artist)
                     ],
                   ),

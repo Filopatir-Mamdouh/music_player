@@ -14,7 +14,7 @@ class Folders extends StatelessWidget {
           ),
           for (int i = 0; i < 10; i++)
             ListTile(
-                leading: Image.asset("assets/song.jpeg"),
+                leading: Icon(Icons.folder),
                 title: const Text("Name"),
                 subtitle: const Text("Direction"),
                 trailing: IconButton(
