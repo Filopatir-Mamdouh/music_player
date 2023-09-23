@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_player/widgets/appbar.dart';
 
 class FavoritesPage extends StatelessWidget {
   final List<String> songs = [
@@ -18,14 +19,7 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Favorites'),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
-        ),
-      ),
+      appBar: customAppBar(context, 'Favorites'),
       body: DefaultTabController(
         length: 2,
         child: Column(
