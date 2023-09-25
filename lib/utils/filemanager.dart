@@ -19,7 +19,7 @@ Widget permissionChecker() {
               : () async {
                   ref.read(permissionProvider).requestPermission();
                 },
-          child: const Text('Ask For Permissions'),
+          child: Text(isDisabled ? '' : 'Ask For Permissions'),
         ),
         MaterialButton(
           onPressed: () async {

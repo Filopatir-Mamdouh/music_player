@@ -19,5 +19,6 @@ void importFolders() async {
           imagePath: 'assets/song.jpeg',
           artist: 'unknown'));
     }
+    Data.updateFolders();
   }
 }

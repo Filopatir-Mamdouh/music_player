@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_player/pages/player.dart';
 import 'package:music_player/widgets/appbar.dart';
 
 class RecentPage extends StatelessWidget {
@@ -23,7 +24,12 @@ class RecentPage extends StatelessWidget {
                         Text('\tShuffle playback'),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => const MusicPlayerPage()));
+                    },
                   ),
                   const Icon(Icons.delete_sweep_outlined)
                 ],

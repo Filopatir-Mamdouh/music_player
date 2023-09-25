@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_player/models/data.dart';
 
 class Folders extends StatelessWidget {
   const Folders({super.key});
@@ -12,11 +13,11 @@ class Folders extends StatelessWidget {
             leading: Icon(Icons.play_arrow),
             title: Text("Shuffle playback"),
           ),
-          for (int i = 0; i < 10; i++)
+          for (int i = 0; i < Data.folders.length; i++)
             ListTile(
-                leading: Icon(Icons.folder),
-                title: const Text("Name"),
-                subtitle: const Text("Direction"),
+                leading: const Icon(Icons.folder),
+                title: Text(Data.folders[i].folderName),
+                subtitle: Text('${Data.folders[i].songs.length} Songs'),
                 trailing: IconButton(
                     onPressed: () {}, icon: const Icon(Icons.settings)))
         ],

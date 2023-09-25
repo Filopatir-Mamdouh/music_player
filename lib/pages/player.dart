@@ -20,10 +20,10 @@ class MusicPlayerPage extends ConsumerWidget {
             children: <Widget>[
               // Square Image
               Container(
-                width: double.infinity,
-                height: 300,
-                color: Colors.grey,
-              ),
+                  width: double.infinity,
+                  height: 300,
+                  color: Colors.grey,
+                  child: Image.asset('assets/song.jpeg')),
               // Song Name Text
               Padding(
                 padding: const EdgeInsets.all(16.0),

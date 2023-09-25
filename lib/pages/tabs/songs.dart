@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music_player/models/data.dart';
+import 'package:music_player/pages/player.dart';
 import 'package:music_player/provider/musicprovider.dart';
 
 class Songs extends ConsumerWidget {
@@ -32,6 +33,10 @@ class Songs extends ConsumerWidget {
                     .read(musicplayerProvider)
                     .currentPlayingList([Data.songs[i]]);
                 ref.read(musicplayerProvider).playmusic();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => const MusicPlayerPage()));
               },
               child: ListTile(
                 leading: Image.asset('assets/song.jpeg'),
