@@ -1,10 +1,10 @@
-# music_player
+# Music Player App built using Flutter
+<br>
 
-A new Flutter project.
+## info
 
-## Getting Started
+This project was made as a task w
 
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
